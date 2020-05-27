@@ -1,0 +1,54 @@
+.navbar-brand {
+  font-family: Arial, Helvetica, sans-serif
+}
+
+nav {
+  background-color: #1d2329;
+  font-size: 15px;
+  height: 100px;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+nav li>a {
+  color: #aae7ea;
+}
+
+nav li>a:hover {
+  color: #17cbd4;
+  color: #007bff;
+  color: #17a2b8;
+}
+.nav-link.active{
+  color: #17a2b8;
+}
+button[type="submit"] {
+  border-color: #17a2b8;
+  color: #17a2b8;
+}
+
+button[type="submit"]:hover {
+  background-color: #0a454e;
+  color: #aae7ea;
+}
+
+input,
+input:focus {
+  background-color: #1c1f22;
+  color: #aae7ea;
+}
+
+.dropdown-menu {
+  background-color: #1d2329;
+}
+
+.dropdown-item {
+  color: #aae7ea;
+}
+
+.dropdown-item:hover {
+  color: #17a2b8;
+  background-color: #0a454e;
+}

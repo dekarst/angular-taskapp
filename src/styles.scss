@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "custom-theme";
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/** ng-select styles start*/
+.custom-multiselect{
+    width:30%;
+    color:grey;
+}
+ng-select.ng-input:focus{
+    color:teal;
+}
+
+ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #dc3545;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+}
+
+.ng-value-icon{
+  float: right;
+  padding:0;
+  padding-left: 5px;
+  padding-right:0px;
+}
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value{
+    background-color: teal;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    color:black;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+    background: rgba(0,0,0,0.12);
+    color:rgb(1, 56, 56);
+}
+/** ng-select styles end*/
+
+button{
+    width:110px;
+    height: 35px;
+}

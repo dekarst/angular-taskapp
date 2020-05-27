@@ -1,0 +1,24 @@
+<mat-form-field class="custom-wrapper-example"
+                style="width:100%"
+                appearance='outline'
+                matAutocompleteOrigin
+                #origin="matAutocompleteOrigin">
+  <mat-label>{{label}}</mat-label>
+  <input type="text"
+         matInput
+         required
+         placeholder="autofill"
+         displayWith="displayFn"
+         [formControl]="_formControl"
+         formControlName="formControlName"
+         [matAutocomplete]="auto"
+         [matAutocompleteConnectedTo]="origin"
+         (focus)="getData($event)"
+         (keyup)="getData($event)">
+  <mat-error *ngIf="_formControl.errors?.required && _formControl.dirty">Field {{label}} is required</mat-error>
+  <mat-error *ngIf="_formControl.errors?.nomatches && _formControl.dirty">Value does not match</mat-error>
+</mat-form-field>
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let option of filteredOptions | async"
+              [value]="option.name">{{option.name}}</mat-option>
+</mat-autocomplete>

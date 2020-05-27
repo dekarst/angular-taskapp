@@ -1,0 +1,56 @@
+<div class="project-container">
+  <h2>PROJECT DETAILS <i class="fas fa-angle-double-right"></i></h2>
+  <mat-card class="col-md-10 col-xs-12">
+    <mat-card-header>
+      <mat-card-title>
+        <img src="https://st4.depositphotos.com/5040187/19757/v/450/depositphotos_197571740-stock-illustration-logo-swoosh-global-red-letter.jpg"
+             alt="Photo of a Shiba Inu">
+        <div class="title">{{project.name}} - {{project_id}}</div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-subtitle>
+      <h3>{{project.title}}</h3>
+      <p>Responsible: {{project.manager}}</p>
+      <p>Period: from {{project.start_date}} to {{project.end_date}}</p>
+
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>{{project.description}}</p>
+
+      <p>Documents:</p>
+      <ul class="col-md-12">
+        <li *ngFor="let document of project.documents">
+          <p *ngIf="document.type=='file'"
+             class="col-md-12"><span class="col-md-8">{{document.type}}</span> &nbsp;<span>{{document.name}}</span>
+            <app-file-download *ngIf="document.type=='file'"
+                               [filename]="document.content"
+                               class="col-md-2 col-xs-4 col-sm-4"
+                               style="float:right"></app-file-download>
+            <!-- <button *ngIf="document.type=='file'"
+                    mat-raised-button
+                    class="col-md-2 col-xs-4 col-sm-4"
+                    style="float:right"
+                    (click)="download(document.content,document.name+'jpg')">Download</button> -->
+          </p>
+          <p *ngIf="document.type=='link'"
+             class="col-md-12"><span class="col-md-8">{{document.type}}</span> &nbsp;<a [attr.href]="document.content">{{document.name}}</a></p>
+
+        </li>
+      </ul>
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <label for="">Upload new document</label>
+          <app-file-upload></app-file-upload>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button
+              color="primary">Details</button>
+      <button mat-raised-button
+              color="accent"
+              routerLink="/admin/task-create">Edit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,65 @@
+// .has-error {
+//   label {
+//     color: #dc3545;
+//   }
+
+//   input {
+//     color: #dc3545;
+//   }
+// }
+
+// .alert-danger {
+//   background-color: transparent;
+//   border-color: transparent;
+// }
+
+// label {
+//   float: left;
+// }
+
+// input {
+//   border-top: 0px;
+//   border-right: 0px;
+//   border-bottom: 2px solid #74787c;
+//   border-left: 0px solid #ced4da;
+// }
+// input.ng-invalid{
+//     border-color:#f05766;
+// }
+// button {
+//   background-color: #066fa0;
+//   width:150px;
+// }
+.wrapper {
+  width: 100%;
+}
+
+.container {
+  width: 60%;
+  margin: 0 auto;
+  top:20%
+}
+
+.form-container {
+  width: 100%;
+}
+
+mat-card {
+  text-align: center;
+  background: #ffffff7c;
+}
+
+mat-form-field {
+  width: 280px;
+}
+
+hr {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: darkcyan;
+  border: 15px solid #2b6761;
+}
+
+input {
+  width: 100%;
+}

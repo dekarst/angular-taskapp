@@ -1,0 +1,67 @@
+h2 {
+    font-size: 25px;
+    margin-top: 15px;
+    font-weight: 440;
+    color: rgb(43, 46, 46);
+  }
+  h2 i{
+    padding-left:5px;
+  }
+  .project-list {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  img {
+    float: left;
+  }
+  
+  mat-card {
+    width: 23%;
+    min-height: 300px;
+    height: auto;
+    display: inline-block;
+    margin: 1%;
+    align-items: center;
+  }
+  
+  mat-card-title span {
+    float: left;
+  }
+  
+  img {
+    width: 100px;
+    height: auto;
+  }
+  
+  button {
+    width: 100px;
+    display: inline-block;
+  }
+  
+  @media all and (min-width:320px) and (max-width:640px) {
+    mat-card {
+      width: 100%;
+    }
+  }
+  
+  @media all and (min-width:641px) and (max-width:760px) {
+    mat-card {
+      width: 45%;
+    }
+  
+    button {
+      float: left;
+    }
+  }
+  
+  @media all and (min-width:761px) and (max-width:1024px) {
+    mat-card {
+      width: 31%;
+    }
+  
+    button {
+      width: 90px;
+    }
+  }
+  

@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <!-- <mat-card> -->
+    <div id="fileSelector"
+         class="file-upload">
+      <div class="file-selector">
+        <div>
+          <input id="fileUpload"
+                 type="file"
+                 accept="*.*"
+                 name="fileUpload"
+                 multiple
+                 ng2FileSelect
+                 [uploader]="uploader"
+                 style="display:none;position: absolute;">
+          <button type="button"
+                  mat-raised-button
+                  color="accent"
+                  style="background-color:primary; position:relative"><label for="fileUpload">Browse</label></button>
+        </div>
+        <div *ngIf="uploader?.queue?.length>0">
+          <button mat-raised-button
+                  id="uploadAll"
+                  class="btn btn-default"
+                  (click)="uploader.uploadAll()">Upload all</button>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li *ngFor="let item of uploader.queue">
+            <span>{{item?.file?.name}}</span>
+            <button mat-raised-button
+                    class="action"
+                    (click)="item.remove()"><i class="fa fa-times"></i></button>
+            <button mat-raised-button
+                    class="action"
+                    (click)="item.upload()">
+              <mat-icon>file_upload</mat-icon>
+            </button>
+            <mat-progress-bar [value]="item.progress"></mat-progress-bar>
+          </li>
+        </ul>
+      </div>
+      <div class="uploaded-files" *ngIf="files?.length>0"><label>Uploaded files</label>
+        <ul>
+          <li *ngFor="let file of files"><span>{{file.uploadname}}</span></li>
+        </ul>
+      </div>
+    </div>
+  <!-- </mat-card> -->
+</div>

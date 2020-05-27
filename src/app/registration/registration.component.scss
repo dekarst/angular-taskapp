@@ -1,0 +1,72 @@
+input {
+  width: 100%;
+}
+
+div.form-container {
+  display: inline-table;
+  width: 33%;
+}
+
+.autocomplete {
+  width: 70%;
+}
+
+mat-card {
+  float: left;
+}
+
+mat-label {
+  font-size: 22px;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+mat-form-field {
+  width: 70%;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+app-autocomplete {
+  width: 70%;
+}
+
+button[type=submit] {
+  width: 150px;
+}
+
+hr {
+  margin-top: 35px;
+  border-color: darkcyan;
+}
+
+@media all and (max-width:767px) {
+  app-autocomplete {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+mat-radio-group{
+  position:relative;
+}
+mat-radio-button{
+  display:inline-block;
+  width:180px;
+}
+.roleLabel{
+  font-size: 14px;
+  color:grey;
+  padding:0 5px 10px 0;
+  display:block;
+}
+.roleLabel:after{
+  content:'*'
+}
+.form-container.roles{
+  float: right;
+}

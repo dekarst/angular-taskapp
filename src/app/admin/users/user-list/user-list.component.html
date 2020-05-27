@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <h2><span>EMPLOYEE LIST</span>  <i class="fas fa-angle-double-right"></i></h2>
+</mat-toolbar>
+
+<div class="container col-md-12 col-xs-12 cosm-12" style="width:100%">
+  <table class="table">
+    <thead>
+      <tr>
+        <td>NAME</td>
+        <td>DEPARTMENT</td>
+        <td>POSITION</td>
+        <td>ROLE</td>
+        <td>BLOCKED</td>
+        <td>EDIT</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</td>
+        <td>{{user.department.name}}</td>
+        <td>{{user.position.name}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.is_blocked ? 'blocked':'active'}}</td>
+        <td><button mat-raised-button color="primary"
+          [routerLink]="['/admin/user-edit/',user._id]">Edit</button><i class="fas fa-pencil" area-hidden="true"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

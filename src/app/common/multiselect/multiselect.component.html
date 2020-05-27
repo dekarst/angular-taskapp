@@ -1,0 +1,23 @@
+<ng-select [items]="items" class="custom-multiselect"
+           [multiple]="true"
+           [virtualScroll]="true"
+           [searchable]="true"
+           [clearable]="true"
+           placeholder="{{placeholder}}"
+           [disabled]="isSelectDisabled"
+           bindLabel="name"
+           bindValue="id"
+           required
+           [(ngModel)]="selectedItems"
+           (change)="onChange($event)">
+  <ng-option [value]="item.id"
+             [disabled]="item.disabled"
+             *ngFor="let item of items">
+    <img src="../../../assets/images/{{item.image}}"
+         *ngIf="item.image"
+         width="20px"
+         height="20px" />
+  </ng-option>
+</ng-select>
+
+<!--usage in the parent <app-multiselect (selection)="selectedItems=$event" [items]="items" [selectedItems]="selectedItems" style="background-color:primary"></app-multiselect> -->

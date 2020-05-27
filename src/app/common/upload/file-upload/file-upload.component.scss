@@ -1,0 +1,47 @@
+div ul{
+    margin:10px 0 10px 0;
+}
+ul,  
+li {  
+      margin: 3px;  
+      padding: 3px;  
+      list-style: none;  
+      width:95%;
+}
+ul li span{
+    float:left;
+}
+mat-card{
+    width:40%;
+    text-align: center;
+}
+div.file-selector>div{
+    width:50%;
+    display:inline-block;
+}
+.action{
+    float: right;
+    width:40px;
+    padding: 3px;
+    position:relative;
+}
+div.file-selector button{
+    width:100px;
+    height: 40px;
+}
+#browse{
+    float:left;
+    top:0;
+    left:0;
+}
+#uploadAll{
+    float:right;
+    margin-top:10px;
+}
+.progress{
+    position:absolute;
+}
+.uploaded-files ul>li{
+    float:left;
+    display:block;
+}

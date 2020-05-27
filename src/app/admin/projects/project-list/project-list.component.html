@@ -1,0 +1,32 @@
+<div class="">
+  <div class="project-list">
+    <h2><span>STARTED PROJECTS</span><i class="fas fa-angle-double-right"></i></h2>
+    <div>
+      <mat-card *ngFor="i of [1,2,3,4,5,6,7,8]"
+                class="col-md-4 col-xs-12">
+        <mat-card-header>
+          <mat-card-title>
+            <!-- class="example-header-image">  -->
+            <img src="https://st4.depositphotos.com/5040187/19757/v/450/depositphotos_197571740-stock-illustration-logo-swoosh-global-red-letter.jpg"
+                 alt="Photo of a Shiba Inu">
+            <!-- </mat-card-title>
+            <mat-card-title> -->
+            <span>PROJECT #356172 </span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-subtitle>INOVATIONS</mat-card-subtitle>
+        <mat-card-content>
+          <p>Lorem wjenfkek wefnkenfkwen fberncn cenoecm cememrimim xerxhcemciegmwimh fxermiiremgim fxeeimxvg</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button
+                  [routerLink]="['/admin/project-details/',1]"
+                  color="primary">Details</button>
+          <button mat-raised-button
+                  color="accent"
+                  routerLink="/admin/task-create">Edit</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
