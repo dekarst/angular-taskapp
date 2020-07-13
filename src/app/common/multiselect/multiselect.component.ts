@@ -33,6 +33,7 @@ export class MultiselectComponent implements OnInit {
   ngOnInit(): void {
   }
   onChange($event){
-    this.selection.emit(this.selectedItems)
+    console.log($event)
+    this.selection.emit($event._id)
   }
 }

@@ -14,6 +14,8 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
 import { FileUploadComponent } from '../common/upload/file-upload/file-upload.component';
 import { FileDownloadComponent } from '../common/download/file-download/file-download.component';
+import { MultiselectComponent } from '../common/multiselect/multiselect.component';
+
 // import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 // import {RegistrationComponent} from '../registration/registration.component';
@@ -34,6 +36,7 @@ import { FileDownloadComponent } from '../common/download/file-download/file-dow
     ProjectDetailsComponent,
     FileUploadComponent,
     FileDownloadComponent,
+    MultiselectComponent
   ],
   imports: [
     CommonModule,

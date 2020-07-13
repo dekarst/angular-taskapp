@@ -4,7 +4,7 @@ import 'rxjs';
 import {Observable} from 'rxjs';
 
 
-const DOWNLOAD_URL = "http://localhost:5000/api/file/download/";
+const DOWNLOAD_URL = "http://localhost:3000/api/file/download/";
 @Injectable({
   providedIn: 'root'
 })

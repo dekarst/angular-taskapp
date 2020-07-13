@@ -16,6 +16,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FileUploadModule } from 'ng2-file-upload';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 const usedModules = [
   CommonModule,
   MatButtonModule,
@@ -32,6 +36,8 @@ const usedModules = [
   NgSelectModule,
   MatToolbarModule,
   MatProgressBarModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   FileUploadModule
 ]
 @NgModule({

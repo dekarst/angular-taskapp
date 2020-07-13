@@ -5,52 +5,70 @@
       <mat-card-title>
         <img src="https://st4.depositphotos.com/5040187/19757/v/450/depositphotos_197571740-stock-illustration-logo-swoosh-global-red-letter.jpg"
              alt="Photo of a Shiba Inu">
-        <div class="title">{{project.name}} - {{project_id}}</div>
+        <div class="title">{{project.title}} - {{project_id}}</div>
       </mat-card-title>
     </mat-card-header>
     <mat-card-subtitle>
       <h3>{{project.title}}</h3>
-      <p>Responsible: {{project.manager}}</p>
-      <p>Period: from {{project.start_date}} to {{project.end_date}}</p>
-
+      <p>Responsible persons:</p>
+      <p *ngFor="let responsible of project.responsible_persons">{{responsible.first_name}} {{responsible.last_name}} - {{responsible.position.name}}</p>
+      <p>Period: from {{project.start_date | date:'yyyy-MM-dd'}} to {{project.end_date| date:'yyyy-MM-dd'}}</p>
     </mat-card-subtitle>
     <mat-card-content>
       <p>{{project.description}}</p>
 
-      <p>Documents:</p>
-      <ul class="col-md-12">
-        <li *ngFor="let document of project.documents">
-          <p *ngIf="document.type=='file'"
-             class="col-md-12"><span class="col-md-8">{{document.type}}</span> &nbsp;<span>{{document.name}}</span>
-            <app-file-download *ngIf="document.type=='file'"
-                               [filename]="document.content"
-                               class="col-md-2 col-xs-4 col-sm-4"
-                               style="float:right"></app-file-download>
-            <!-- <button *ngIf="document.type=='file'"
-                    mat-raised-button
-                    class="col-md-2 col-xs-4 col-sm-4"
-                    style="float:right"
-                    (click)="download(document.content,document.name+'jpg')">Download</button> -->
-          </p>
-          <p *ngIf="document.type=='link'"
-             class="col-md-12"><span class="col-md-8">{{document.type}}</span> &nbsp;<a [attr.href]="document.content">{{document.name}}</a></p>
-
-        </li>
-      </ul>
-      <div class="row col-md-12">
-        <div class="col-md-6">
-          <label for="">Upload new document</label>
-          <app-file-upload></app-file-upload>
-        </div>
+      <p style="font-weight:bold">Documents:</p>
+      <div class="doc-container">
+        <ul class="col-md-12">
+          <li *ngFor="let file of files"
+              [ngClass]="">
+            <p *ngIf="file"
+               class="col-md-12"><span class="col-md-8"><i class="fa fa-file-pdf-o"
+                   aria-hidden="true"></i></span> &nbsp;<span>{{file}}</span>
+              <app-file-download *ngIf="file"
+                                 [filename]="file"
+                                 class="col-md-2 col-xs-4 col-sm-4"
+                                 style="float:right"></app-file-download>
+            </p>
+        </ul>
+        <ul class="col-md-12">
+          <li *ngFor="let link of links"
+              [ngClass]="'file'">
+            <p *ngIf="link"
+               class="col-md-12"><a [attr.href]="link">{{link}}</a></p>
+          </li>
+        </ul>
       </div>
 
+      <div class="controls">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <label for="">Upload new document</label>
+          <app-file-upload [metaInfo]="metaInfo"></app-file-upload>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <label for="">Add Link</label>
+          <button mat-raised-button
+                  [disabled]="linkControl.invalid"
+                  color="primary"
+                  id="addLink"
+                  (click)="uploadLink()">Add</button>
+          <mat-form-field>
+            <input matInput
+                   type="text"
+                   [formControl]="linkControl"
+                   appearance="outline">
+            <mat-error *ngIf="linkControl.errors?.pattern && linkControl.dirty">Link format is invalid</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button
-              color="primary">Details</button>
-      <button mat-raised-button
               color="accent"
               routerLink="/admin/task-create">Edit</button>
+      <button mat-raised-button
+              routerLink="/admin/dashboard"
+              color="warn">Close</button>
     </mat-card-actions>
   </mat-card>
 </div>

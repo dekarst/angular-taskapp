@@ -18,22 +18,26 @@ h2 {
   
   mat-card {
     width: 23%;
-    min-height: 300px;
-    height: auto;
+    height: 300px;
     display: inline-block;
     margin: 1%;
     align-items: center;
+    overflow:hidden;
   }
-  
   mat-card-title span {
     float: left;
   }
-  
+  mat-card[id^="mat-card_*"].more{
+    overflow-y:scroll; 
+  }
+  p span{
+    color:teal;
+    text-decoration: underline;
+  }
   img {
     width: 100px;
     height: auto;
   }
-  
   button {
     width: 100px;
     display: inline-block;

@@ -1,4 +1,4 @@
-import { Directive, forwardRef } from '@angular/core';
+import { Directive, forwardRef, Input } from '@angular/core';
 import { Validator, NG_ASYNC_VALIDATORS, AbstractControl, ValidationErrors } from '@angular/forms';
 import { UserUniqueService } from '../registration/services/user-unique.service';
 import { Observable } from 'rxjs';
@@ -15,13 +15,16 @@ import { map, switchMap } from 'rxjs/operators';
   ]
 })
 export class UniqueDirective implements Validator {
+  @Input() appUniqueApply: boolean;
+
   constructor(private userUniqueService: UserUniqueService) { }
 
   validate(control: AbstractControl): any {
-    // const forbidden = ['tsv@abv.bg'];
 
     return new Promise((resolve) => {
       setTimeout(() => {
+        if (!this.appUniqueApply) { resolve(null) }
+
         this.userUniqueService.checkExistingUser(control.value).subscribe(user => {
           if (user && user.length > 0) {
             resolve({ unique: false })

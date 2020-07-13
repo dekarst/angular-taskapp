@@ -1,0 +1,34 @@
+$common-padding:5%;
+$common-font-size:18px;
+
+mat-card{
+    margin-top:25px;
+    padding:$common-padding;
+    font-size:$common-font-size;
+}
+form{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+}
+mat-form-field:not(datepicker), .multiselect{
+    width:70%;
+    mat-label{
+        font-size:$common-font-size;
+    }
+}
+ mat-form-field.datepicker{
+    width: 33%;
+    &:last-child{
+        padding:$common-padding;
+    }
+    
+}
+input, textarea{
+    font-size:20px;
+}
+button{
+    width:200px;
+    padding:5;
+    float:right;
+}

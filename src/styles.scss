@@ -14,18 +14,25 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+h2{
+    padding:10px;
+}
+mat-toolbar{
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+}
 /** ng-select styles start*/
 .custom-multiselect{
-    width:30%;
-    color:grey;
+    width:100%;
+    color:rgb(78, 76, 76);
 }
-ng-select.ng-input:focus{
+ng-select.ng-input:focus {
     color:teal;
 }
 
 ng-select.ng-invalid.ng-touched .ng-select-container {
   border-color: #dc3545;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+//   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
 }
 
 .ng-value-icon{

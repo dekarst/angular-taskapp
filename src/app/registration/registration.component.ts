@@ -56,16 +56,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasAutocompleteErrors = !this.country || !this.city || !this.department || !this.position;
-    this.user = { first_name: '', middle_name: '', last_name: '', email: '', password: '', phone: '', department: '', position: '', role: 'user', address: { country: '', city: '', street: '', zip: 0 } }
-    this.route.paramMap.subscribe(params => {
-      this.editMode = params.get('_id') ? true : false;
-      this.user_id = params.get('_id');
-      this.getUser(this.user_id).subscribe(user => {
-        this.user = {...user};
-        this.position = user.position
-        this.buildForm();
-      })
-    })
+    this.user = { first_name: '', middle_name: '', last_name: '', email: '', password: '', department: '', position: '', role: 'user', address: { country: '', city: '', street: '', phone: '000-000' } }
     this.getCountryList()
       .subscribe((data: Country[]) => {
         this.countryList = data;
@@ -83,18 +74,31 @@ export class RegistrationComponent implements OnInit {
       .subscribe((data: Position[]) => {
         this.positionList = data;
       });
-    this.buildForm();
+    this.route.paramMap.subscribe(params => {
+      this.editMode = params.get('_id') ? true : false;
+      this.user_id = params.get('_id');
+      this.hasAutocompleteErrors = false;
+      this.getUser(this.user_id).subscribe(user => {
+        this.user = { ...user };
+        this.autocomlpeteFieldError = { country: false, city: false, department: false, position: false }
+        this.buildForm();
+      });
+      if(!this.user_id){
+        this.buildForm();
+      }
+    })
   }
+  
   buildForm() {
     this.registerForm = this.fb.group({
       first_name: [this.user.first_name, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       middle_name: [this.user.middle_name, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       last_name: [this.user.last_name, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       email: [this.user.email, [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.pattern('[a-zA-Z0-9!@#$%^&*-_+=]*')]],
+      password: '',
       address: this.fb.group({
-        zip: [this.user.address.zip, [Validators.pattern("^[0-9]*$")]],
         street: [this.user.address.street, [Validators.required]],
+        phone: [this.user.address.phone, [Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g)]]
       }),
       role: [this.user.role, [Validators.required]],
     })
@@ -130,9 +134,6 @@ export class RegistrationComponent implements OnInit {
   getUser(user_id) {
     return this.httpService.get<any>(BASE_API_URL + 'api/user/manage/' + user_id);
   }
-  // get f() {
-  //   return this.registerForm.controls;
-  // }
   get first_name() {
     return this.registerForm.controls.first_name;
   }
@@ -155,16 +156,15 @@ export class RegistrationComponent implements OnInit {
     let addressGroup = <FormGroup>this.registerForm.controls.address;
     return addressGroup.controls.street;
   }
-  get zip() {
+  get phone() {
     let addressGroup = <FormGroup>this.registerForm.controls.address;
-    return addressGroup.controls.zip;
+    return addressGroup.controls.phone;
   }
   get role() {
     return this.registerForm.controls.role;
   }
   setRole() {
     this.user.role = this.registerForm.controls.role.value;
-    console.log('set role', this.user.role)
   }
   setPosition(position: any) {
     if (!position) return;
@@ -173,7 +173,6 @@ export class RegistrationComponent implements OnInit {
   setCountry(country: any) {
     if (!country) return;
     this.country = country[0]._id;
-    this.user.address.zip = country[0].zip;
   }
   setCity(city: any) {
     if (!city) return;
@@ -195,11 +194,23 @@ export class RegistrationComponent implements OnInit {
     this.user.position = this.position;
     this.user.department = this.department;
     this.user = Object.assign({}, this.user);
-    this.httpService.post(BASE_API_URL + 'api/user/register/', this.user).subscribe(res => {
-      console.log(res)
-      this.noficationService.notifySubject.next('Registration successful');
-      this.noficationService.notify('success');
-    })
+    if (!this.editMode) {
+      this.httpService.post(BASE_API_URL + 'api/user/register/', this.user).subscribe(res => {
+        console.log(res)
+        this.noficationService.notifySubject.next('Registration successful');
+        this.noficationService.notify('success');
+      })
+    } else {
+      if (!this.user.password) {
+        delete this.user.password;
+      }
+      this.httpService.patch(BASE_API_URL + 'api/user/manage/' + this.user_id, this.user).subscribe(res => {
+        console.log(res)
+        this.noficationService.notifySubject.next('Update successful');
+        this.noficationService.notify('success');
+      })
+
+    }
     console.log(this.user);
   }
 }

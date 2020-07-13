@@ -27,7 +27,7 @@ import { ApiInterceptor } from './http/interceptors/api.interceptor';
 import { ApiService } from './http/services/api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutocompleteComponent } from './common/autocomplete/autocomplete.component';
-import { MultiselectComponent } from './common/multiselect/multiselect.component';
+// import { MultiselectComponent } from './common/multiselect/multiselect.component';
 import { UploadComponent } from './common/upload/upload.component';
 import { UploadService } from './common/upload/upload.service';
 import { FileDownloadService } from './common/download/service/file-download.service';
@@ -48,9 +48,8 @@ export const BASE_API_URL = "http://localhost:3000/";
     ProgressSpinnerComponent,
     RegistrationComponent,
     AutocompleteComponent,
-    MultiselectComponent,
+    // MultiselectComponent,
     UploadComponent,
-    NotificationComponent,
     NotificationComponent,
     // UniqueDirective
     // FileUploadComponent,

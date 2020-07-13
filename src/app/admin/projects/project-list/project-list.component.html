@@ -2,7 +2,7 @@
   <div class="project-list">
     <h2><span>STARTED PROJECTS</span><i class="fas fa-angle-double-right"></i></h2>
     <div>
-      <mat-card *ngFor="i of [1,2,3,4,5,6,7,8]"
+      <mat-card *ngFor="let project of projects; let i= index" [ngClass]="more ? 'more':''" id="{{'mat-card_'+i}}"
                 class="col-md-4 col-xs-12">
         <mat-card-header>
           <mat-card-title>
@@ -11,16 +11,17 @@
                  alt="Photo of a Shiba Inu">
             <!-- </mat-card-title>
             <mat-card-title> -->
-            <span>PROJECT #356172 </span>
+            <span>PROJECT {{project.title}} </span>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-subtitle>INOVATIONS</mat-card-subtitle>
+        <mat-card-subtitle>DURATION from {{project.start_date  | date:'yyyy-MM-dd'}} to {{project.end_date | date:'yyyy-MM-dd'}}</mat-card-subtitle>
         <mat-card-content>
-          <p>Lorem wjenfkek wefnkenfkwen fberncn cenoecm cememrimim xerxhcemciegmwimh fxermiiremgim fxeeimxvg</p>
+          <p *ngIf="!more">{{project.description.substring(0,100)}}<span (click)="more=!more"> More...</span></p>
+          <p *ngIf="more">{{project.description}}<span (click)="more=!more"> Less</span></p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button
-                  [routerLink]="['/admin/project-details/',1]"
+                  [routerLink]="['/admin/project-details/',project._id]"
                   color="primary">Details</button>
           <button mat-raised-button
                   color="accent"

@@ -1,1 +1,95 @@
-<p>project-create works!</p>
+<div class="container">
+  <mat-card style="width:100%">
+    <h2>Create Project</h2>
+    <form action=""
+          [formGroup]="projectForm"
+          class="form-group"
+          (ngSubmit)="projectForm.valid && createProject(projectForm.value)">
+      <div class="form-container">
+        <mat-form-field appearance="outline"
+                        class="left">
+          <mat-label>Project title</mat-label>
+          <input matInput
+                 required
+                 formControlName="title"
+                 placeholder="Title">
+          <mat-hint>Up to 255 synmols allowed</mat-hint>
+          <mat-error *ngIf="f.title.errors?.required">Project title is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="example-full-width datepicker"
+                        appearance="">
+          <mat-label>Start date</mat-label>
+          <input matInput
+                 [min]="minDate"
+                 [matDatepicker]="pickerStart"
+                 formControlName="start_date">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+          <mat-error *ngIf="f.start_date.errors?.required">Project start date is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width datepicker"
+                        appearance="">
+          <mat-label>End date</mat-label>
+          <input matInput
+                 [min]="minDate"
+                 [matDatepicker]="pickerEnd"
+                 formControlName="end_date">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error *ngIf="f.end_date.errors?.required">Project start date is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-container multiselect">
+        <ng-select [items]="employees"
+                   id="users"
+                   class="custom-multiselect"
+                   [multiple]="true"
+                   [virtualScroll]="true"
+                   [searchable]="true"
+                   [clearable]="true"
+                   placeholder="Select project members"
+                   bindLabel="name"
+                   bindValue="id"
+                   required
+                   (input)="getUsers($event)"
+                   (change)="onMembersChange($event)">
+          <ng-option [value]="employee.id"
+                     [disabled]="employee.disabled"
+                     *ngFor="let employee of employees">
+            <!-- <img src="../../../assets/images/{{item.image}}"
+                 *ngIf="item.image"
+                 width="20px"
+                 height="20px" /> -->
+          </ng-option>
+        </ng-select>
+      </div>
+      <div class="form-container">
+        <mat-form-field appearance="outline"
+                        class="example-full-width left">
+          <mat-label>Project description</mat-label>
+          <textarea matInput
+                    cols="20"
+                    rows="5"
+                    required
+                    formControlName="description"
+                    placeholder="Description"></textarea>
+          <mat-hint>Up to 255 synmols allowed</mat-hint>
+          <mat-error *ngIf="f.description.errors?.required">Project description is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <button mat-button
+                type="submit"
+                (click)="createProject(projectForm.value)"
+                [disabled]="!projectForm.valid"
+                class="mat-raised-button mat-primary"
+                color="primary">Create Project</button>
+
+      </div>
+    </form>
+  </mat-card>
+</div>

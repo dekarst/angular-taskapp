@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from './models/project';
-import { Document } from './models/document';
+// import { Project } from './models/project';
+import { Project } from '../../projects/models/project';
+// import { Document } from './models/document';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { BASE_API_URL } from 'src/app/app.module';
+import {FormControl, Validators} from '@angular/forms';
 
 
 @Component({
@@ -12,35 +16,42 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProjectDetailsComponent implements OnInit {
   project_id;
-  project: Project;
+  project: Project = null;
   fileUrl;
-  documents: Array<Document> = [];
-  constructor(private routeParams: ActivatedRoute, private sanitizer: DomSanitizer) {
+  metaInfo: string = '';
+  files: Array<any> = [];
+  links: Array<any> = [];
+  linkControl:FormControl;
+  constructor(private routeParams: ActivatedRoute, private sanitizer: DomSanitizer, private http: HttpClient) {
     this.project_id = routeParams.snapshot.params.id;
-    let content = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
-    this.project = {
-      project_id: this.project_id,
-      name: "PROJECT #2789",
-      title: "Project for workflow management",
-      description: content,
-      manager: "Gerogi Ivanov",
-      start_date: new Date("2020-04-10").toISOString().split('T')[0],
-      end_date: new Date("2021-06-10").toISOString().split('T')[0],
-      documents: [
-        { type: 'link', name: 'Document N 1', content: 'https://www.google.com/' },
-        { type: 'link', name: 'Document N 2', content: 'https://www.google.com/' },
-        { type: 'file', name: 'Intstructions', content: '2020-04-28T15:02:16.065Z_pdf-sample.pdf' },
-        { type: 'file', name: 'Business cases', content: '2020-04-28T14:33:17.852Z_Screenshot from 2019-10-27 21-51-36.png' }]
-      }
-
+    this.metaInfo = 'project/' + this.project_id;
+    this.linkControl = new FormControl('',Validators.pattern(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig))
   }
 
   ngOnInit(): void {
     /** get service data for project by ID */
+    this.http.get<Project>(BASE_API_URL + 'api/project/' + this.project_id)
+      .subscribe(project => {
+        this.project = project[0];
+        for(const{file:f,link:l} of this.project.documents){
+          if(f){
+            this.files.push(f);
+          }
+          if(l){
+            this.links.push(l)
+          }
+        }
+      })
+  }
+  uploadLink(){
+    this.http.post(BASE_API_URL+'api/project/'+this.project_id,{link:this.linkControl.value}).subscribe(res=>{
+      console.log(res);
+    })
+
   }
   download(url, filename) {
     fetch(url).then(function (t) {
-    return t.blob().then((blob) => {
+      return t.blob().then((blob) => {
         var a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.setAttribute("download", filename);

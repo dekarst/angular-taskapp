@@ -15,14 +15,14 @@
           <button type="button"
                   mat-raised-button
                   color="accent"
-                  style="background-color:primary; position:relative"><label for="fileUpload">Browse</label></button>
+                  style="background-color:primary; position:relative"><label id="browse" for="fileUpload">Browse</label></button>
         </div>
-        <div *ngIf="uploader?.queue?.length>0">
+        <!-- <div *ngIf="uploader?.queue?.length>0">
           <button mat-raised-button
                   id="uploadAll"
                   class="btn btn-default"
                   (click)="uploader.uploadAll()">Upload all</button>
-        </div>
+        </div> -->
       </div>
       <div>
         <ul>
@@ -39,6 +39,13 @@
             <mat-progress-bar [value]="item.progress"></mat-progress-bar>
           </li>
         </ul>
+        <div *ngIf="uploader?.queue?.length>0">
+          <button mat-raised-button
+                  id="uploadAll"
+                  class="btn btn-default"
+                  (click)="uploader.uploadAll()">Upload all</button>
+        </div>
+
       </div>
       <div class="uploaded-files" *ngIf="files?.length>0"><label>Uploaded files</label>
         <ul>

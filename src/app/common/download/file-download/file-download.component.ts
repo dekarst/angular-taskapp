@@ -10,11 +10,11 @@ import { saveAs } from 'file-saver';
 })
 
 export class FileDownloadComponent implements OnInit {
-  @Input() filename: string = '';
-  files: any = [
-    { filename: '2020-04-23T19:11:19.558Z_photo-vertical-1d0586b9c0b8.jpeg' },
-    { filename: '2020-04-23T18:50:16.267Z_Screenshot from 2019-10-27 21-51-36.png' }
-  ]
+  @Input() filename: string;
+  // files: any = [
+  //   { filename: '2020-04-23T19:11:19.558Z_photo-vertical-1d0586b9c0b8.jpeg' },
+  //   { filename: '2020-04-23T18:50:16.267Z_Screenshot from 2019-10-27 21-51-36.png' }
+  // ]
 
   constructor(private _downloadService: FileDownloadService) { }
 
